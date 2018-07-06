@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="VideoCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="275" height="297"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="275" height="297"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video_bg" translatesAutoresizingMaskIntoConstraints="NO" id="vPL-66-tEl">
+                        <rect key="frame" x="0.0" y="0.0" width="275" height="297"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSP-dx-dcI">
+                        <rect key="frame" x="0.0" y="2" width="275" height="295"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999403953552" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0K 14F 640*480" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAC-r8-vPZ">
+                        <rect key="frame" x="6" y="6" width="94" height="14.5"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ugx-If-vTK">
+                        <rect key="frame" x="6" y="269" width="105" height="22"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video_stats_mic" translatesAutoresizingMaskIntoConstraints="NO" id="gOg-zu-gxj">
+                                <rect key="frame" x="10" y="5" width="12" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="12" id="A3X-WQ-6eO"/>
+                                    <constraint firstAttribute="height" constant="12" id="Xve-gb-tb1"/>
+                                </constraints>
+                            </imageView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="RZD-9m-wI1">
+                                <rect key="frame" x="25" y="9" width="75" height="3"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                            </progressView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="gOg-zu-gxj" firstAttribute="centerY" secondItem="ugx-If-vTK" secondAttribute="centerY" id="ED5-OO-N04"/>
+                            <constraint firstAttribute="height" constant="22" id="NTs-o1-CGD"/>
+                            <constraint firstAttribute="width" constant="105" id="afx-Cn-wf9"/>
+                            <constraint firstItem="gOg-zu-gxj" firstAttribute="leading" secondItem="wAv-Nu-qNh" secondAttribute="leading" constant="10" id="zVx-nL-7Uu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wAv-Nu-qNh"/>
+                    </view>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhD-bF-WA0">
+                        <rect key="frame" x="247" y="6" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="Odv-y9-CFI"/>
+                            <constraint firstAttribute="width" constant="22" id="nKf-0Y-X3Z"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="22" id="wCV-2B-JCP"/>
+                            <constraint firstAttribute="height" constant="22" id="wpu-o8-opr"/>
+                        </constraints>
+                        <state key="normal" image="video_more"/>
+                        <connections>
+                            <action selector="onClickedMoreBtn:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Gfm-3g-Jrt"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="fAC-r8-vPZ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="6" id="7bL-sQ-POi"/>
+                <constraint firstItem="ugx-If-vTK" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="6" id="HkX-SO-iFT"/>
+                <constraint firstAttribute="bottom" secondItem="vPL-66-tEl" secondAttribute="bottom" id="Mmb-ml-drb"/>
+                <constraint firstItem="vPL-66-tEl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="QmK-bd-2PP"/>
+                <constraint firstAttribute="bottom" secondItem="ugx-If-vTK" secondAttribute="bottom" constant="6" id="RtE-qU-CTl"/>
+                <constraint firstItem="fAC-r8-vPZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="6" id="cUc-Wp-lIK"/>
+                <constraint firstAttribute="trailing" secondItem="vPL-66-tEl" secondAttribute="trailing" id="gY0-40-9cA"/>
+                <constraint firstAttribute="trailing" secondItem="nhD-bF-WA0" secondAttribute="trailing" constant="6" id="joe-H8-xE3"/>
+                <constraint firstItem="nhD-bF-WA0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="6" id="pjS-kU-7hd"/>
+                <constraint firstItem="vPL-66-tEl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="vi8-Rt-f2c"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="275" height="297"/>
+            <connections>
+                <outlet property="micImageView" destination="gOg-zu-gxj" id="rto-Pf-DaJ"/>
+                <outlet property="moreBtn" destination="nhD-bF-WA0" id="N1s-Ab-grD"/>
+                <outlet property="pvAudioEnergy" destination="RZD-9m-wI1" id="MXc-bx-TPO"/>
+                <outlet property="renderView" destination="aSP-dx-dcI" id="cnQ-Ui-e0F"/>
+                <outlet property="videoBg" destination="vPL-66-tEl" id="6Dt-0d-JWT"/>
+                <outlet property="videoInfoLabel" destination="fAC-r8-vPZ" id="UM1-Pc-QQ9"/>
+            </connections>
+            <point key="canvasLocation" x="39.5" y="81.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="video_bg" width="222" height="187"/>
+        <image name="video_more" width="22" height="22"/>
+        <image name="video_stats_mic" width="21" height="21"/>
+    </resources>
+</document>
