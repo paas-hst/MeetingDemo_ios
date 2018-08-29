@@ -71,7 +71,7 @@
     
     _fsp_engine = [FspEngine sharedEngineWithAppId:@APP_ID
                                            logPath:documentPath
-                                        serverAddr:@"http://access.paas.haoshitong.com/fetch_optimization_servers"
+                                        serverAddr:@""
                                           delegate:self];
     
     return _fsp_engine ? YES : NO;
