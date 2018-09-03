@@ -183,6 +183,14 @@ static NSString * const reuseIdentifier = @"MainVideoCell";
     [alertVC addAction:backAction];
     [alertVC addAction:closeAction];
     [alertVC addAction:cancle];
+    
+    UIPopoverPresentationController *popover = alertVC.popoverPresentationController;    
+    if (popover) {        
+        popover.sourceView = self.cameraBtn;
+        popover.sourceRect = self.cameraBtn.bounds;
+        popover.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    }
+    
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
@@ -389,6 +397,15 @@ static NSString * const reuseIdentifier = @"MainVideoCell";
         _collectionView.bounces = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView registerNib:[UINib nibWithNibName:@"VideoCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
+        
+        [self.view addSubview:self.collectionView];
+        [_collectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        NSLayoutConstraint *constraintW = [NSLayoutConstraint constraintWithItem:_collectionView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
+        NSLayoutConstraint *constraintH = [NSLayoutConstraint constraintWithItem:_collectionView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0];
+        
+        [self.view addConstraint:constraintW];
+        [self.view addConstraint:constraintH];
     }
     
     return _collectionView;
