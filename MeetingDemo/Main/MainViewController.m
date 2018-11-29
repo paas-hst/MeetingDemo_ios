@@ -216,9 +216,7 @@ static NSString * const reuseIdentifier = @"MainVideoCell";
         [videoCell showVideo:userID videoId:videoID];
         
     } else if (eventType == FSP_REMOTE_VIDEO_PUBLISH_STOPED) {
-        // 关闭远端视频
-        [_engine setRemoteVideoRender:userID videoId:videoID render:nil];   
-        
+        // 远端视频关闭，更新ui        
         [videoCell closeVideo];
     }     
 }
