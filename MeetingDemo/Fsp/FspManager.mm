@@ -17,19 +17,22 @@
 #import "FspManager.h"
 #import "FspMgrDataType.h"
 
-#define APP_ID ""
-#define APP_SECRET_KEY ""
 
 
 @interface FspManager () <FspEngineDelegate>
 {
     BOOL _isAudioPublishing;
+    NSString* _strAppId;
+    NSString* _strSecretKey;
+    NSString* _strServerAddr;
 }
 @property (nonatomic, strong) FspEngine *fsp_engine;
 
 @end
 
 @implementation FspManager
+
+
 
 + (instancetype)instance {
     static FspManager *s_instance = nil;
@@ -69,9 +72,23 @@
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentPath = [documentPaths objectAtIndex:0];
     
-    _fsp_engine = [FspEngine sharedEngineWithAppId:@APP_ID
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    BOOL useConfigVal = [userDefaults boolForKey:CONFIG_KEY_USECONFIG];
+    
+    if (useConfigVal) {
+        _strAppId = [userDefaults stringForKey:CONFIG_KEY_APPID];
+        _strSecretKey = [userDefaults stringForKey:CONFIG_KEY_SECRECTKEY];
+        _strServerAddr = [userDefaults stringForKey:CONFIG_KEY_SERVETADDR];
+    } else {
+        _strAppId = @"925aa51ebf829d49fc98b2fca5d963bc";
+        _strSecretKey = @"d52be60bb810d17e";
+        _strServerAddr = @"";
+    }
+    
+    _fsp_engine = [FspEngine sharedEngineWithAppId:_strAppId
                                            logPath:documentPath
-                                        serverAddr:@""
+                                        serverAddr:_strServerAddr
                                           delegate:self];
     
     return _fsp_engine ? YES : NO;
@@ -85,9 +102,9 @@
 - (BOOL)joinGroup:(NSString * _Nonnull)grouplId
                  userId:(NSString * _Nonnull)userId
 {
-    fsp::tools::AccessToken token(APP_SECRET_KEY);
+    fsp::tools::AccessToken token([_strSecretKey UTF8String]);
     
-    token.app_id = APP_ID;
+    token.app_id = [_strAppId UTF8String];
     token.group_id = [grouplId UTF8String];
     token.user_id = [userId UTF8String];
     token.expire_time = 0;

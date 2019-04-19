@@ -23,9 +23,14 @@
 @property NSString* userId;
 @property NSString* videoId;
 
+@property (nonatomic, assign) CGRect theLastFrame;
+@property (nonatomic, assign) BOOL isFullScreen;
+
 - (void) onSecondUpdate;
 
 - (void) showVideo:(NSString*)userId videoId:(NSString*)videoId;
+
+- (void) show;
 
 - (void) closeVideo;
 

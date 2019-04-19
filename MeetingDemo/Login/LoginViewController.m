@@ -14,6 +14,8 @@
 #import "FspManager.h"
 #import "AppDelegate.h"
 #import "FspMgrDataType.h"
+#import "LoginConfigViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface LoginViewController () <UITextFieldDelegate>
 
@@ -25,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet UIView *loginWarningView;
 @property (weak, nonatomic) IBOutlet UIButton *reloginBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *TopConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *versionInfoLabel;
+
+@property (nonatomic, strong) MainViewController *mainVC;
 
 @end
 
@@ -35,6 +40,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self checkAudioStatus];
+    [self checkVideoStatus];
     
     _joinBtn.enabled = NO;
     
@@ -59,6 +67,86 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    [_versionInfoLabel setText:[NSString stringWithFormat:@"SdkVersion:  %@", [FspEngine getVersionInfo]]];
+}
+
+- (void)checkAudioStatus{
+    
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+    switch (authStatus) {
+        case AVAuthorizationStatusNotDetermined:
+            //没有询问是否开启麦克风
+            [self requestMic];
+            break;
+        case AVAuthorizationStatusRestricted:
+            //未授权，家长限制
+            
+            break;
+        case AVAuthorizationStatusDenied:
+            //玩家未授权
+            
+            break;
+        case AVAuthorizationStatusAuthorized:
+            //玩家授权
+            
+            break;
+        default:
+            break;
+    }
+    
+    
+}
+
+- (void)requestMic{
+    
+    
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeAudio completionHandler:^(BOOL granted) {
+        if (granted) {
+            NSLog(@"******麦克风准许");
+        }else{
+            NSLog(@"******麦克风不准许");
+        }
+    }];
+    
+}
+
+//授权相机
+- (void)videoAuthAction
+{
+    
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+        NSLog(@"%@",granted ? @"相机准许":@"相机不准许");
+    }];
+    
+}
+
+
+- (void) checkVideoStatus
+{
+    
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    switch (authStatus) {
+        case AVAuthorizationStatusNotDetermined:
+            //没有询问是否开启相机
+            [self videoAuthAction];
+            break;
+        case AVAuthorizationStatusRestricted:
+            //未授权，家长限制
+            
+            break;
+        case AVAuthorizationStatusDenied:
+            //未授权
+            
+            break;
+        case AVAuthorizationStatusAuthorized:
+            //玩家授权
+            
+            break;
+        default:
+            break;
+    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,14 +171,19 @@
     [[FspManager instance] joinGroup:_groupNameTextField.text userId:_userNameTextField.text];
 }
 
+- (IBAction)onBtnAppConfig:(id)sender {
+    LoginConfigViewController* loginConfigCv = [[LoginConfigViewController alloc] initWithNibName:@"LoginConfig" bundle:nil];
+    [self.navigationController presentViewController:loginConfigCv animated:YES completion:nil];
+}
+
 #pragma mark - CallBack Methods
 
 - (void)onLogin:(NSInteger)eventType errCode:(NSInteger)errCode {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (errCode == FSP_ERR_OK) {
-            MainViewController *mainVC = [[MainViewController alloc] init];
-            [self.navigationController pushViewController:mainVC animated:NO];
-            
+            if (!_mainVC) {
+                [self.navigationController pushViewController:self.mainVC animated:NO];
+            }
             _loginingView.hidden = YES;
             _loginView.hidden = NO;
         } else {
@@ -98,6 +191,13 @@
             _loginWarningView.hidden = NO;
         }
     });
+}
+
+- (MainViewController *)mainVC{
+    if (!_mainVC) {
+        _mainVC = [[MainViewController alloc] init];
+    }
+    return _mainVC;
 }
 
 #pragma mark - Bind RAC

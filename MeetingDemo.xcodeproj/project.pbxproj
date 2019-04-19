@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8440331920EE1E24007620BD /* FspKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8440331820EE1E24007620BD /* FspKit.framework */; };
+		843EDF66224DE82300BD5822 /* FspKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843EDF65224DE82300BD5822 /* FspKit.framework */; };
+		843EDF68224DE86400BD5822 /* FspKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 843EDF67224DE86400BD5822 /* FspKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		843F336B21CA6DD700CCD1D8 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843F336A21CA6DCE00CCD1D8 /* VideoToolbox.framework */; };
+		846F3D6521F8403C004406EB /* LoginConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846F3D6321F8403C004406EB /* LoginConfigViewController.m */; };
+		846F3D6A21F8473F004406EB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846F3D6821F8473F004406EB /* LoginViewController.m */; };
+		849CB82E223FBAA4005B965B /* LoginConfig.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849CB82D223FBAA3005B965B /* LoginConfig.xib */; };
 		84A584ED20861D2000B75AF8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A584EC20861D2000B75AF8 /* AppDelegate.m */; };
 		84A584F520861D2000B75AF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A584F420861D2000B75AF8 /* Assets.xcassets */; };
 		84A584F820861D2000B75AF8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A584F620861D2000B75AF8 /* LaunchScreen.storyboard */; };
 		84A584FB20861D2000B75AF8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A584FA20861D2000B75AF8 /* main.m */; };
 		84ACEE6520E0EE8100B43AF0 /* aes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84ACEE3B20E0EE8100B43AF0 /* aes.cpp */; };
 		84DF7C7C20D3D2F7007BAB47 /* ReactiveObjC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC70DD3A2089EA1D00F9FC3A /* ReactiveObjC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CC5C76662088328900A734EC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5C76652088328900A734EC /* LoginViewController.m */; };
 		CC5C7670208845E500A734EC /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC5C766F208845E500A734EC /* Login.storyboard */; };
 		CC5C7686208875BD00A734EC /* VideoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5C7684208875BD00A734EC /* VideoCollectionViewCell.m */; };
 		CC5C7687208875BD00A734EC /* VideoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5C7685208875BD00A734EC /* VideoCollectionViewCell.xib */; };
@@ -26,7 +30,6 @@
 		CC5C76B520888EB500A734EC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5C76B420888EB500A734EC /* AVFoundation.framework */; };
 		CC5C76B720888EC300A734EC /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5C76B620888EC300A734EC /* CoreMedia.framework */; };
 		CC5C76B920888ECD00A734EC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5C76B820888ECD00A734EC /* AudioToolbox.framework */; };
-		CC5C76BB20888EDA00A734EC /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5C76BA20888EDA00A734EC /* libstdc++.tbd */; };
 		CC5C76BD20888EE200A734EC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5C76BC20888EE200A734EC /* libz.tbd */; };
 		CC5C76FA2088B67600A734EC /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5C76F92088B67600A734EC /* libiconv.tbd */; };
 		CC5C76FD2088B6F600A734EC /* FspManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC5C76FC2088B6F600A734EC /* FspManager.mm */; };
@@ -50,21 +53,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		8460D89220CA5C4D003C06C5 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "${PROJECT_DIR}../../../output/demos/ios";
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CC70DD352089E96700F9FC3A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				843EDF68224DE86400BD5822 /* FspKit.framework in Embed Frameworks */,
 				84DF7C7C20D3D2F7007BAB47 /* ReactiveObjC.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -73,7 +68,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8440331820EE1E24007620BD /* FspKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FspKit.framework; sourceTree = "<group>"; };
+		843EDF65224DE82300BD5822 /* FspKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FspKit.framework; sourceTree = "<group>"; };
+		843EDF67224DE86400BD5822 /* FspKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FspKit.framework; sourceTree = "<group>"; };
+		843F336A21CA6DCE00CCD1D8 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		846F3D6221F8403C004406EB /* LoginConfigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginConfigViewController.h; sourceTree = "<group>"; };
+		846F3D6321F8403C004406EB /* LoginConfigViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginConfigViewController.m; sourceTree = "<group>"; };
+		846F3D6721F8473F004406EB /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		846F3D6821F8473F004406EB /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		849CB82D223FBAA3005B965B /* LoginConfig.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginConfig.xib; sourceTree = "<group>"; };
 		84A584E820861D2000B75AF8 /* MeetingDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A584EB20861D2000B75AF8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		84A584EC20861D2000B75AF8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -121,8 +123,6 @@
 		84ACEE6220E0EE8100B43AF0 /* inttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inttypes.h; sourceTree = "<group>"; };
 		84ACEE6320E0EE8100B43AF0 /* stdint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdint.h; sourceTree = "<group>"; };
 		84ACEE6420E0EE8100B43AF0 /* fsp_token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fsp_token.h; path = Token/fsp_token.h; sourceTree = "<group>"; };
-		CC5C76642088328900A734EC /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		CC5C76652088328900A734EC /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		CC5C766F208845E500A734EC /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		CC5C7683208875BD00A734EC /* VideoCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCollectionViewCell.h; sourceTree = "<group>"; };
 		CC5C7684208875BD00A734EC /* VideoCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCollectionViewCell.m; sourceTree = "<group>"; };
@@ -138,7 +138,6 @@
 		CC5C76B420888EB500A734EC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		CC5C76B620888EC300A734EC /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		CC5C76B820888ECD00A734EC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		CC5C76BA20888EDA00A734EC /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		CC5C76BC20888EE200A734EC /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		CC5C76F92088B67600A734EC /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		CC5C76FB2088B6F600A734EC /* FspManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FspManager.h; sourceTree = "<group>"; };
@@ -176,12 +175,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8440331920EE1E24007620BD /* FspKit.framework in Frameworks */,
+				843EDF66224DE82300BD5822 /* FspKit.framework in Frameworks */,
+				843F336B21CA6DD700CCD1D8 /* VideoToolbox.framework in Frameworks */,
 				CC70DD14208990B900F9FC3A /* MediaToolbox.framework in Frameworks */,
 				CC70DD12208990B000F9FC3A /* CoreAudio.framework in Frameworks */,
 				CC5C76FA2088B67600A734EC /* libiconv.tbd in Frameworks */,
 				CC5C76BD20888EE200A734EC /* libz.tbd in Frameworks */,
-				CC5C76BB20888EDA00A734EC /* libstdc++.tbd in Frameworks */,
 				CC5C76B920888ECD00A734EC /* AudioToolbox.framework in Frameworks */,
 				CC70DD3B2089EA1E00F9FC3A /* ReactiveObjC.framework in Frameworks */,
 				CC5C76B720888EC300A734EC /* CoreMedia.framework in Frameworks */,
@@ -195,6 +194,7 @@
 		84A584DF20861D2000B75AF8 = {
 			isa = PBXGroup;
 			children = (
+				843EDF67224DE86400BD5822 /* FspKit.framework */,
 				84A584EA20861D2000B75AF8 /* MeetingDemo */,
 				84A584E920861D2000B75AF8 /* Products */,
 				CC5C76B120888E9A00A734EC /* Frameworks */,
@@ -311,10 +311,13 @@
 			isa = PBXGroup;
 			children = (
 				CC5C766F208845E500A734EC /* Login.storyboard */,
-				CC5C76642088328900A734EC /* LoginViewController.h */,
-				CC5C76652088328900A734EC /* LoginViewController.m */,
 				CC5C77022088BF4A00A734EC /* CustomTextField.h */,
 				CC5C77032088BF4A00A734EC /* CustomTextField.m */,
+				846F3D6221F8403C004406EB /* LoginConfigViewController.h */,
+				846F3D6321F8403C004406EB /* LoginConfigViewController.m */,
+				849CB82D223FBAA3005B965B /* LoginConfig.xib */,
+				846F3D6721F8473F004406EB /* LoginViewController.h */,
+				846F3D6821F8473F004406EB /* LoginViewController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -371,13 +374,13 @@
 		CC5C76B120888E9A00A734EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8440331820EE1E24007620BD /* FspKit.framework */,
+				843EDF65224DE82300BD5822 /* FspKit.framework */,
+				843F336A21CA6DCE00CCD1D8 /* VideoToolbox.framework */,
 				CC70DD3A2089EA1D00F9FC3A /* ReactiveObjC.framework */,
 				CC70DD13208990B900F9FC3A /* MediaToolbox.framework */,
 				CC70DD11208990AF00F9FC3A /* CoreAudio.framework */,
 				CC5C76F92088B67600A734EC /* libiconv.tbd */,
 				CC5C76BC20888EE200A734EC /* libz.tbd */,
-				CC5C76BA20888EDA00A734EC /* libstdc++.tbd */,
 				CC5C76B820888ECD00A734EC /* AudioToolbox.framework */,
 				CC5C76B620888EC300A734EC /* CoreMedia.framework */,
 				CC5C76B420888EB500A734EC /* AVFoundation.framework */,
@@ -418,7 +421,6 @@
 				84A584E520861D2000B75AF8 /* Frameworks */,
 				84A584E620861D2000B75AF8 /* Resources */,
 				CC70DD352089E96700F9FC3A /* Embed Frameworks */,
-				8460D89220CA5C4D003C06C5 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -474,6 +476,7 @@
 				CCBCE9AF208B2CDB002519F3 /* SettingsTextCell.xib in Resources */,
 				CCBCE9CF208B2E0F002519F3 /* SettingsVideoCell.xib in Resources */,
 				84A584F820861D2000B75AF8 /* LaunchScreen.storyboard in Resources */,
+				849CB82E223FBAA4005B965B /* LoginConfig.xib in Resources */,
 				CCBCE9B9208B2D03002519F3 /* SettingsButtonCell.xib in Resources */,
 				CC5C76A820888CE600A734EC /* Settings.storyboard in Resources */,
 				CC5C7687208875BD00A734EC /* VideoCollectionViewCell.xib in Resources */,
@@ -495,14 +498,15 @@
 				CC5C76A620888CD000A734EC /* SettingsViewController.m in Sources */,
 				CC70DD0E208988C900F9FC3A /* BaseNavigationViewController.m in Sources */,
 				CCBCE9C9208B2E03002519F3 /* SettingsStateCell.m in Sources */,
-				CC5C76662088328900A734EC /* LoginViewController.m in Sources */,
 				CCBCE9CE208B2E0F002519F3 /* SettingsVideoCell.m in Sources */,
 				CCBCE9D7208B4A5F002519F3 /* UIView+Hierarchy.m in Sources */,
 				CC70DD232089D48800F9FC3A /* FspMgrDataType.m in Sources */,
 				CC5C76FD2088B6F600A734EC /* FspManager.mm in Sources */,
 				CC5C7686208875BD00A734EC /* VideoCollectionViewCell.m in Sources */,
 				CCBCE9B8208B2D03002519F3 /* SettingsButtonCell.m in Sources */,
+				846F3D6521F8403C004406EB /* LoginConfigViewController.m in Sources */,
 				84A584FB20861D2000B75AF8 /* main.m in Sources */,
+				846F3D6A21F8473F004406EB /* LoginViewController.m in Sources */,
 				84ACEE6520E0EE8100B43AF0 /* aes.cpp in Sources */,
 				CC5C77042088BF4A00A734EC /* CustomTextField.m in Sources */,
 				84A584ED20861D2000B75AF8 /* AppDelegate.m in Sources */,
@@ -554,7 +558,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -577,6 +581,7 @@
 				RESOURCES_TARGETED_DEVICE_FAMILY = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
 			};
 			name = Debug;
 		};
@@ -611,7 +616,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -628,6 +633,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};
@@ -635,7 +641,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3Q45W4GD72;
 				ENABLE_BITCODE = NO;
@@ -649,8 +658,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hst.MeetingDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 armv7 armv7s";
+				VALID_ARCHS = arm64;
 			};
 			name = Debug;
 		};
@@ -658,7 +669,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3Q45W4GD72;
 				ENABLE_BITCODE = NO;
@@ -671,8 +685,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hst.MeetingDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 armv7 armv7s";
+				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};

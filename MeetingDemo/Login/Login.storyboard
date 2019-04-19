@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aRP-Ue-V2O">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aRP-Ue-V2O">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,7 +44,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZT-2f-NvE" userLabel="login">
-                                <rect key="frame" x="190.5" y="134" width="286" height="168"/>
+                                <rect key="frame" x="191" y="134" width="286" height="168"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入组名" textAlignment="natural" minimumFontSize="17" background="login_input" translatesAutoresizingMaskIntoConstraints="NO" id="X0F-eJ-fEr" customClass="CustomTextField">
                                         <rect key="frame" x="18" y="0.0" width="250" height="42"/>
@@ -101,7 +101,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Tf-lS-6PU" userLabel="logining">
-                                <rect key="frame" x="218.5" y="210" width="230" height="68"/>
+                                <rect key="frame" x="219" y="210" width="230" height="68"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_waiting" translatesAutoresizingMaskIntoConstraints="NO" id="ube-Js-kdy">
                                         <rect key="frame" x="100" y="2" width="30" height="30"/>
@@ -128,19 +128,19 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2013-2018 hst.com.All Right Reserved." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4p-5C-1PV">
-                                <rect key="frame" x="231" y="332.5" width="205.5" height="10"/>
+                                <rect key="frame" x="231" y="332" width="206" height="10"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                 <color key="textColor" red="0.3294117647" green="0.36470588240000001" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="深圳银澎云计算有限公司 版权所有" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46A-TC-UpR">
-                                <rect key="frame" x="279" y="346.5" width="110" height="8.5"/>
+                                <rect key="frame" x="279" y="346" width="110" height="9"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="7"/>
                                 <color key="textColor" red="0.32941176470588235" green="0.36470588235294116" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ISr-2i-cmN" userLabel="login_warning">
-                                <rect key="frame" x="213.5" y="176" width="240" height="130"/>
+                                <rect key="frame" x="214" y="176" width="240" height="130"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="组名或用户名错误！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOc-S4-gSm">
                                         <rect key="frame" x="42" y="42" width="156" height="21"/>
@@ -182,6 +182,22 @@
                                     <constraint firstAttribute="height" constant="130" id="az6-ao-ng5"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SqT-ob-Q98">
+                                <rect key="frame" x="232" y="318" width="206" height="10"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                <color key="textColor" red="0.3294117647" green="0.36470588240000001" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6o9-rK-zgu">
+                                <rect key="frame" x="533" y="70" width="80" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="      应用配置" backgroundImage="appconfig_button"/>
+                                <connections>
+                                    <action selector="onBtnAppConfig:" destination="HMy-9O-koi" eventType="touchUpInside" id="8mY-8F-GQe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.1447362006" green="0.15777590869999999" blue="0.1883098185" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -210,6 +226,7 @@
                         <outlet property="loginingView" destination="6Tf-lS-6PU" id="avP-Vq-XUo"/>
                         <outlet property="reloginBtn" destination="xcw-c6-lOm" id="xuc-L3-b6c"/>
                         <outlet property="userNameTextField" destination="S9a-m4-jyw" id="Ujo-SY-GZt"/>
+                        <outlet property="versionInfoLabel" destination="SqT-ob-Q98" id="47h-BG-1cZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GIW-CQ-XL7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -218,6 +235,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="appconfig_button" width="120" height="36"/>
         <image name="login_button" width="250" height="42"/>
         <image name="login_icon_warning" width="30" height="30"/>
         <image name="login_input" width="250" height="42"/>

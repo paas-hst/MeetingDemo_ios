@@ -21,6 +21,10 @@
 {
     NSTimer *secondTimer;
     NSInteger noTouchSecondCount;
+    
+    BOOL _is_open_local_camera;
+    
+    BOOL _cur_camera_position_front;
 }
 @property (nonatomic, weak) IBOutlet UIButton *micBtn;
 @property (nonatomic, weak) IBOutlet UIButton *cameraBtn;
@@ -64,6 +68,59 @@ static NSString * const reuseIdentifier = @"MainVideoCell";
     UITapGestureRecognizer* singleRecognizer;
     singleRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapAction:)];
     [self.view addGestureRecognizer:singleRecognizer];
+    
+    [self addApplicationNotification];
+    
+    _is_open_local_camera = false;
+    
+    //默认摄像头为前置
+    _cur_camera_position_front = YES;
+}
+
+
+- (void) addApplicationNotification {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicaitionWillEnterBackGround) name:UIApplicationWillResignActiveNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackGround) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeGround) name:UIApplicationWillEnterForegroundNotification object:nil];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
+}
+
+- (void)applicaitionWillEnterBackGround{
+    
+    NSLog(@"%@",NSStringFromSelector(_cmd));
+}
+
+- (void)applicationDidEnterBackGround{
+    NSLog(@"%@",NSStringFromSelector(_cmd));
+    if ([[FspManager instance] isOpenLocalVideo]) {
+        [self stopLocalVideo];
+    }
+    self->secondTimer.fireDate = [NSDate distantFuture];
+}
+
+- (void)applicationWillEnterForeGround{
+    
+    NSLog(@"%@",NSStringFromSelector(_cmd));
+}
+
+- (void)applicationDidBecomeActive{
+    NSLog(@"%@",NSStringFromSelector(_cmd));
+    if (_is_open_local_camera == true) {
+        __weak MainViewController *weakSelf = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf startLocalVideo];
+        });
+        
+    }
+    
+    self->secondTimer.fireDate = [NSDate distantFuture];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -77,6 +134,8 @@ static NSString * const reuseIdentifier = @"MainVideoCell";
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
+    _is_open_local_camera = false;
     [self->secondTimer invalidate];
 }
 
@@ -160,23 +219,41 @@ static NSString * const reuseIdentifier = @"MainVideoCell";
                                                                      message:@""
                                                               preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *frontAction = [UIAlertAction actionWithTitle:@"前置摄像头" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        fspM.isFrontCamera = YES;
+
         if (fspM.isOpenLocalVideo) {
+            if (_cur_camera_position_front == YES) {
+                return;
+            }
             [_engine switchCamera];
+            _cur_camera_position_front = YES;
         } else {
             [self startLocalVideo];
         }
+   
+        _is_open_local_camera = true;
+        
     }];
     UIAlertAction *backAction = [UIAlertAction actionWithTitle:@"后置摄像头" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        fspM.isFrontCamera = NO;
+
         if (fspM.isOpenLocalVideo) {
+            if (_cur_camera_position_front == NO) {
+                return;
+            }
             [_engine switchCamera];
+            _cur_camera_position_front = NO;
         } else {
-            [self startLocalVideo];            
+            [self startLocalVideo];
+            [_engine switchCamera];
+            _cur_camera_position_front = NO;
         }
+
+        _is_open_local_camera = true;
     }];
     UIAlertAction *closeAction = [UIAlertAction actionWithTitle:@"关闭摄像头" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self stopLocalVideo];
+        
+        _is_open_local_camera = false;
+        
     }];
     UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     [alertVC addAction:frontAction];
@@ -208,17 +285,35 @@ static NSString * const reuseIdentifier = @"MainVideoCell";
         NSLog(@"no more free viewcell");
         return;
     }
-    
     if (eventType == FSP_REMOTE_VIDEO_PUBLISH_STARTED) {
         // 打开远端视频
-        [_engine setRemoteVideoRender:userID videoId:videoID render:videoCell.renderView];
-        
+        [_engine setRemoteVideoRender:userID videoId:videoID render:videoCell.renderView mode:FSP_RENDERMODE_FIT_CENTER];
         [videoCell showVideo:userID videoId:videoID];
-        
     } else if (eventType == FSP_REMOTE_VIDEO_PUBLISH_STOPED) {
-        // 远端视频关闭，更新ui        
-        [videoCell closeVideo];
-    }     
+        // 关闭远端视频
+        [_engine setRemoteVideoRender:userID videoId:videoID render:nil mode:FSP_RENDERMODE_FIT_CENTER];
+        
+        VideoCollectionViewCell *cell = [self getCellWithUserId:userID videoId:videoID];
+        [cell closeVideo];
+  
+    } else if (eventType == FSP_REMOTE_VIDEO_FIRST_RENDERED){
+        
+    }
+}
+
+- (VideoCollectionViewCell *)getCellWithUserId:(NSString *)userid videoId:(NSString *)videoid
+{
+    VideoCollectionViewCell *cur_cell = nil;
+    for (int i = 0; i< 6; i ++) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+        VideoCollectionViewCell *cell = [self cellWithIndexPath:indexPath];
+        if ((([cell.userId isEqualToString:userid] && [cell.videoId isEqualToString:videoid]) || ([cell.userId isEqualToString:userid] && videoid.length <= 0))) {
+            cur_cell = cell;
+            break;
+        }
+        
+    }
+    return cur_cell;
 }
 
 - (void)onRemoteAudioEvent:(NSString *)userID eventType:(NSInteger)eventType {
@@ -232,7 +327,8 @@ static NSString * const reuseIdentifier = @"MainVideoCell";
         [videoCell showAudio:userID];
         
     } else if (eventType == FSP_REMOTE_VIDEO_PUBLISH_STOPED) {
-        [videoCell closeAudio];
+        VideoCollectionViewCell *cell = [self getCellWithUserId:userID videoId:nil];
+        [cell closeAudio];
     }
 }
 
@@ -242,29 +338,86 @@ static NSString * const reuseIdentifier = @"MainVideoCell";
     //找到一个对应的videoview, 同一用户的音频和视频用同一个view
     VideoCollectionViewCell* firstFreeView = nil;
     VideoCollectionViewCell* firstUserView = nil;
-    //左上角第一个video cell的index是5， 
-    for (int i = 0; i < 6 ; i++) {        
-        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
-        VideoCollectionViewCell *cell = [self cellWithIndexPath:indexPath];
-        if ([userID isEqualToString:cell.userId]) {
-            if ([videoID isEqualToString:cell.videoId] && 
-                (videoID.length <= 0 || cell.videoId.length <= 0)) {
+    VideoCollectionViewCell *secondRemoteScreenView = nil;
+    
+    if (videoID.length <= 0) {
+        for (int i = 0; i < 6; i ++) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+            VideoCollectionViewCell *cell = [self cellWithIndexPath:indexPath];
+            if ([cell.userId isEqualToString:userID]) {
                 return cell;
-            } else if (firstUserView == nil){
-                firstUserView = cell;
             }
         }
-        if (firstFreeView == nil && (cell.userId == nil || cell.userId.length == 0)) {
-            firstFreeView = cell;
+    }
+    
+    //左上角第一个video cell的index是5，
+    if (![videoID isEqualToString:@"reserved_videoid_screenshare"]) {
+        for (int i = 0; i < 6 ; i++) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+            VideoCollectionViewCell *cell = [self cellWithIndexPath:indexPath];
+            /*
+            if ([userID isEqualToString:cell.userId] && ![cell.videoId isEqualToString:@"reserved_videoid_screenshare"])
+            {
+                if ([videoID isEqualToString:cell.videoId] &&
+                    (videoID.length <= 0 || cell.videoId.length <= 0)) {
+                    return cell;
+                } else if (firstUserView == nil){
+                    firstUserView = cell;
+                }
+            }
+            */
+            //得到与userID相同的非投屏流的cell
+            if ([userID isEqualToString:cell.userId] && ![cell.videoId isEqualToString:@"reserved_videoid_screenshare"]) {
+                if ( videoID.length > 0 && ![cell.videoId isEqualToString:videoID]) {
+                    for (int i = 0; i < 6; i ++) {
+                        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+                        VideoCollectionViewCell *cell = [self cellWithIndexPath:indexPath];
+                        if (firstFreeView == nil && (cell.userId == nil || cell.userId.length == 0)) {
+                            firstFreeView = cell;
+                            return firstFreeView;
+                        }
+                    }
+       
+                }
+                return cell;
+                
+            }
+            
+            if (firstFreeView == nil && (cell.userId == nil || cell.userId.length == 0)) {
+                firstFreeView = cell;
+                return firstFreeView;
+            }
+            
         }
     }
+
+
+    //当传过来要一个remoteScreenView的时候
+    if ([videoID isEqualToString:@"reserved_videoid_screenshare"]) {
+        for (int i = 0; i< 6; i ++) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+            VideoCollectionViewCell *cell = [self cellWithIndexPath:indexPath];
+            if ([cell.userId isEqualToString:userID] && [cell.videoId isEqualToString:@"reserved_videoid_screenshare"]) {
+                return cell;
+            }
+            if (secondRemoteScreenView == nil && (cell.userId == nil || cell.userId.length == 0) && (cell.videoId == nil || cell.videoId.length == 0)) {
+                secondRemoteScreenView = cell;
+                return secondRemoteScreenView;
+            }
+            
+        }
+        
+        return secondRemoteScreenView;
+    }
+
     
     if (firstUserView != nil) {
         return firstUserView;
     }
     
-    return firstFreeView;
+    return nil;
 }
+
 
 #pragma mark - 视频
 
@@ -296,12 +449,11 @@ static NSString * const reuseIdentifier = @"MainVideoCell";
     [FspManager instance].isOpenLocalVideo = NO;
     
     FspManager* fspM = [FspManager instance];
-    VideoCollectionViewCell* videoCell = [self getVideoViewCell:fspM.myUserId videoID:nil];
+    VideoCollectionViewCell *videoCell = [self getCellWithUserId:fspM.myUserId videoId:nil];
     if (videoCell == nil) {
         NSLog(@"no releative viewcell");
         return;
     }
-        
     // 停止广播本地视频
     [_engine stopPublishVideo];
         
@@ -348,9 +500,51 @@ static NSString * const reuseIdentifier = @"MainVideoCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     VideoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
+    tap.numberOfTapsRequired = 2;
+    [cell addGestureRecognizer:tap];
     return cell;
 }
+
+- (void)doubleTap:(UITapGestureRecognizer *)tap{
+    VideoCollectionViewCell *cell = (VideoCollectionViewCell *)tap.view;
+    if (cell.isFullScreen) {
+        cell.isFullScreen = NO;
+        cell.frame = cell.theLastFrame;
+        cell.renderView.frame = cell.bounds;
+        for (CALayer *layer in cell.renderView.layer.sublayers) {
+            layer.frame = cell.bounds;
+        }
+        for (VideoCollectionViewCell *allCells in self.collectionView.visibleCells) {
+            allCells.hidden = NO;
+        }
+        
+    }else{
+    
+        CGRect old = cell.frame;
+        CGRect new = self.view.bounds;
+        cell.frame = new;
+        cell.theLastFrame = old;
+        cell.isFullScreen = YES;
+        
+        cell.renderView.frame = new;
+        for (CALayer *layer in cell.renderView.layer.sublayers) {
+            layer.frame = new;
+        }
+
+        for (VideoCollectionViewCell *allCells in self.collectionView.visibleCells) {
+            if (allCells == cell) {
+            
+            }else{
+                allCells.hidden = true;
+            }
+            
+        }
+    
+    }
+    
+}
+
 
 #pragma mark - Bind RAC
 
@@ -381,18 +575,19 @@ static NSString * const reuseIdentifier = @"MainVideoCell";
     if (!_collectionView) {
         _flowLayout = [[VideoHorizontalFlowLayout alloc] init];
         
-        // 根据横竖屏设置布局行与列
         _flowLayout.row = 2;
         _flowLayout.column = 3;
         _flowLayout.lineSpacing = 1;
         _flowLayout.columnSpacing = 1;
         
+        // 根据横竖屏设置布局行与列
         _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:_flowLayout];
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         _collectionView.pagingEnabled = YES;
         _collectionView.bounces = NO;
+        _collectionView.scrollEnabled = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView registerNib:[UINib nibWithNibName:@"VideoCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
         

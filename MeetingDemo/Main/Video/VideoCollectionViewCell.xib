@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,9 +23,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="275" height="297"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSP-dx-dcI">
-                        <rect key="frame" x="0.0" y="2" width="275" height="295"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSP-dx-dcI">
+                        <rect key="frame" x="0.0" y="0.0" width="275" height="297"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -77,14 +76,18 @@
             </view>
             <constraints>
                 <constraint firstItem="fAC-r8-vPZ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="6" id="7bL-sQ-POi"/>
+                <constraint firstItem="aSP-dx-dcI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="EAd-F5-3oC"/>
+                <constraint firstAttribute="trailing" secondItem="aSP-dx-dcI" secondAttribute="trailing" id="HHl-Tf-3NN"/>
                 <constraint firstItem="ugx-If-vTK" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="6" id="HkX-SO-iFT"/>
                 <constraint firstAttribute="bottom" secondItem="vPL-66-tEl" secondAttribute="bottom" id="Mmb-ml-drb"/>
                 <constraint firstItem="vPL-66-tEl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="QmK-bd-2PP"/>
                 <constraint firstAttribute="bottom" secondItem="ugx-If-vTK" secondAttribute="bottom" constant="6" id="RtE-qU-CTl"/>
                 <constraint firstItem="fAC-r8-vPZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="6" id="cUc-Wp-lIK"/>
+                <constraint firstAttribute="bottom" secondItem="aSP-dx-dcI" secondAttribute="bottom" id="eu4-TU-Nul"/>
                 <constraint firstAttribute="trailing" secondItem="vPL-66-tEl" secondAttribute="trailing" id="gY0-40-9cA"/>
                 <constraint firstAttribute="trailing" secondItem="nhD-bF-WA0" secondAttribute="trailing" constant="6" id="joe-H8-xE3"/>
                 <constraint firstItem="nhD-bF-WA0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="6" id="pjS-kU-7hd"/>
+                <constraint firstItem="aSP-dx-dcI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="rZy-7W-sLs"/>
                 <constraint firstItem="vPL-66-tEl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="vi8-Rt-f2c"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
@@ -97,7 +100,7 @@
                 <outlet property="videoBg" destination="vPL-66-tEl" id="6Dt-0d-JWT"/>
                 <outlet property="videoInfoLabel" destination="fAC-r8-vPZ" id="UM1-Pc-QQ9"/>
             </connections>
-            <point key="canvasLocation" x="39.5" y="81.5"/>
+            <point key="canvasLocation" x="39.200000000000003" y="81.409295352323838"/>
         </collectionViewCell>
     </objects>
     <resources>

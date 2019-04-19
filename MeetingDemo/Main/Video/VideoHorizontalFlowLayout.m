@@ -46,6 +46,7 @@
     }
 }
 
+
 - (nullable UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes *attribute = [super layoutAttributesForItemAtIndexPath:indexPath];
     // 计算单页item的布局属性，多页后面加入
@@ -60,6 +61,7 @@
 
     return attribute;
 }
+
 
 // 返回可视视图的rect
 - (nullable NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {

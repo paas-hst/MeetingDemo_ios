@@ -18,7 +18,9 @@
 #import "MainViewController.h"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, SettingButtonCellDelegate>
-
+{
+    NSTimer* _perSecondTimer;
+}
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, copy) NSArray *headerTitles;
 @property (nonatomic, strong) FspEngine *engine;
@@ -37,6 +39,20 @@ static NSString * const kSettingStateCell = @"kSettingStateCell";
     _headerTitles = @[@"基本信息", @"麦克风", @"扬声器"];
     [_tableView registerNib:[UINib nibWithNibName:@"SettingsTextCell" bundle:nil] forCellReuseIdentifier:kSettingTextCell];
     [_tableView registerNib:[UINib nibWithNibName:@"SettingsStateCell" bundle:nil] forCellReuseIdentifier:kSettingStateCell];
+    
+    _perSecondTimer = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        [self onPerSecondTimer];
+    }];
+    [[NSRunLoop currentRunLoop] addTimer:_perSecondTimer forMode:NSDefaultRunLoopMode];
+}
+
+
+///每秒定时器
+-(void) onPerSecondTimer
+{
+    FspManager* fspM = [FspManager instance];
+
+    
 }
 
 - (void)viewWillLayoutSubviews {
