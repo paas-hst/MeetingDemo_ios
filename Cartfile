@@ -1,1 +1,1 @@
-github "ReactiveCocoa/ReactiveObjC"
+github "ReactiveCocoa/ReactiveObjC" ~> 2.1

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="FspAttendeeCell" customModule="MeetingDemo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="313" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="313" height="39.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group 9" translatesAutoresizingMaskIntoConstraints="NO" id="ujL-ZH-wIA">
+                        <rect key="frame" x="30" y="0.0" width="40" height="40.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="SXp-Py-IBp"/>
+                            <constraint firstAttribute="width" constant="40" id="cIB-4a-APG"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fW3-Go-cef">
+                        <rect key="frame" x="232" y="7.5" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="9kW-e5-0mx"/>
+                            <constraint firstAttribute="width" constant="24" id="v3p-gK-1us"/>
+                        </constraints>
+                        <state key="normal" image="camera_btn_disabled"/>
+                        <state key="selected" image="camera_btn_enabled"/>
+                        <connections>
+                            <action selector="attendee_camera_btn_clicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="g2M-ZG-82L"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gId-Kq-rzt">
+                        <rect key="frame" x="269" y="7.5" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="24" id="SlZ-YR-GsZ"/>
+                            <constraint firstAttribute="height" constant="24" id="faa-Pa-jdQ"/>
+                        </constraints>
+                        <state key="normal" image="screen_share_disabled"/>
+                        <state key="selected" image="screen_share_enabled"/>
+                        <connections>
+                            <action selector="attendee_screen_share_btn_clicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YmV-1b-6QI"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4234234234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mY7-dM-F2S">
+                        <rect key="frame" x="75" y="9.5" width="115" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Pj6-Qy-SHf"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vry-bF-QYQ">
+                        <rect key="frame" x="195" y="7.5" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="24" id="Eyr-sz-78X"/>
+                            <constraint firstAttribute="height" constant="24" id="MOt-po-baj"/>
+                        </constraints>
+                        <state key="normal" image="audio_btn_disabled"/>
+                        <state key="selected" image="audio_btn_enabled"/>
+                        <connections>
+                            <action selector="attendee_audio_btn_clicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Ebc-ld-yhh"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ujL-ZH-wIA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="4Hg-eH-hN4"/>
+                    <constraint firstItem="fW3-Go-cef" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="7KJ-uX-jr8"/>
+                    <constraint firstAttribute="bottom" secondItem="mY7-dM-F2S" secondAttribute="bottom" constant="9.5" id="9Kw-sE-bLj"/>
+                    <constraint firstAttribute="bottom" secondItem="fW3-Go-cef" secondAttribute="bottom" constant="8.5" id="CLq-jc-lso"/>
+                    <constraint firstItem="mY7-dM-F2S" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="G7f-UU-PhZ"/>
+                    <constraint firstItem="gId-Kq-rzt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="Gf7-9S-Lmf"/>
+                    <constraint firstItem="vry-bF-QYQ" firstAttribute="leading" secondItem="mY7-dM-F2S" secondAttribute="trailing" constant="5" id="Jlb-TG-jjz"/>
+                    <constraint firstAttribute="trailing" secondItem="gId-Kq-rzt" secondAttribute="trailing" constant="20" id="Rz8-Kd-xo8"/>
+                    <constraint firstItem="ujL-ZH-wIA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="Tho-28-hCd"/>
+                    <constraint firstAttribute="bottom" secondItem="ujL-ZH-wIA" secondAttribute="bottom" id="V4z-CN-XNi"/>
+                    <constraint firstItem="gId-Kq-rzt" firstAttribute="leading" secondItem="fW3-Go-cef" secondAttribute="trailing" constant="13" id="czq-g2-eaM"/>
+                    <constraint firstAttribute="bottom" secondItem="vry-bF-QYQ" secondAttribute="bottom" constant="8.5" id="fzw-2r-Ppf"/>
+                    <constraint firstItem="mY7-dM-F2S" firstAttribute="leading" secondItem="ujL-ZH-wIA" secondAttribute="trailing" constant="5" id="lLG-So-etk"/>
+                    <constraint firstAttribute="bottom" secondItem="gId-Kq-rzt" secondAttribute="bottom" constant="8.5" id="lXq-x9-8Ls"/>
+                    <constraint firstItem="fW3-Go-cef" firstAttribute="leading" secondItem="vry-bF-QYQ" secondAttribute="trailing" constant="13" id="rdw-h7-in1"/>
+                    <constraint firstItem="vry-bF-QYQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="wav-hB-EWz"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="attendee_audio_btn" destination="vry-bF-QYQ" id="vu4-jk-244"/>
+                <outlet property="attendee_camera_btn" destination="fW3-Go-cef" id="CQk-nm-MWl"/>
+                <outlet property="attendee_screen_share_btn" destination="gId-Kq-rzt" id="YIw-ee-k1N"/>
+                <outlet property="attendee_userid_textFiled" destination="mY7-dM-F2S" id="8fL-vK-xzW"/>
+            </connections>
+            <point key="canvasLocation" x="92.028985507246389" y="97.767857142857139"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Group 9" width="180" height="180"/>
+        <image name="audio_btn_disabled" width="24" height="24"/>
+        <image name="audio_btn_enabled" width="24" height="24"/>
+        <image name="camera_btn_disabled" width="24" height="24"/>
+        <image name="camera_btn_enabled" width="24" height="24"/>
+        <image name="screen_share_disabled" width="24" height="24"/>
+        <image name="screen_share_enabled" width="24" height="24"/>
+    </resources>
+</document>

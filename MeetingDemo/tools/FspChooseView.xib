@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FspChooseView" customModule="MeetingDemo" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="zZG-8Q-lsn" customClass="FspChooseView" customModule="MeetingDemo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="viH-hQ-8x9">
+                    <rect key="frame" x="48" y="210" width="318" height="490"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2mn-Wg-fk7">
+                            <rect key="frame" x="286" y="12" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="atT-oS-G3W"/>
+                                <constraint firstAttribute="width" constant="20" id="qE0-9Z-jlM"/>
+                            </constraints>
+                            <state key="normal" image="分组 9"/>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择分辨率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOq-6X-Xty">
+                            <rect key="frame" x="123" y="12" width="72" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="72" id="1JA-3g-eSp"/>
+                                <constraint firstAttribute="height" constant="24" id="LPn-yX-eRe"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yfx-ic-ja1">
+                            <rect key="frame" x="0.0" y="56" width="318" height="434"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="yfx-ic-ja1" firstAttribute="top" secondItem="zOq-6X-Xty" secondAttribute="bottom" constant="20" id="5Bm-Hi-GJT"/>
+                        <constraint firstAttribute="trailing" secondItem="2mn-Wg-fk7" secondAttribute="trailing" constant="12" id="7vA-62-Z5T"/>
+                        <constraint firstAttribute="trailing" secondItem="yfx-ic-ja1" secondAttribute="trailing" id="D4c-OJ-N7E"/>
+                        <constraint firstAttribute="bottom" secondItem="yfx-ic-ja1" secondAttribute="bottom" id="PqU-Zl-NFK"/>
+                        <constraint firstItem="zOq-6X-Xty" firstAttribute="top" secondItem="viH-hQ-8x9" secondAttribute="top" constant="12" id="dRE-tV-sQa"/>
+                        <constraint firstItem="zOq-6X-Xty" firstAttribute="centerX" secondItem="viH-hQ-8x9" secondAttribute="centerX" id="dud-Zy-mtO"/>
+                        <constraint firstItem="2mn-Wg-fk7" firstAttribute="top" secondItem="viH-hQ-8x9" secondAttribute="top" constant="12" id="oPx-vQ-IvD"/>
+                        <constraint firstItem="yfx-ic-ja1" firstAttribute="leading" secondItem="viH-hQ-8x9" secondAttribute="leading" id="qXj-eN-FjL"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="viH-hQ-8x9" firstAttribute="leading" secondItem="l0b-wt-MsA" secondAttribute="leading" constant="48" id="2M1-Jw-oF2"/>
+                <constraint firstItem="viH-hQ-8x9" firstAttribute="top" secondItem="l0b-wt-MsA" secondAttribute="top" constant="166" id="5fa-v5-kVH"/>
+                <constraint firstItem="l0b-wt-MsA" firstAttribute="bottom" secondItem="viH-hQ-8x9" secondAttribute="bottom" constant="162" id="LT2-Kd-eBb"/>
+                <constraint firstItem="l0b-wt-MsA" firstAttribute="trailing" secondItem="viH-hQ-8x9" secondAttribute="trailing" constant="48" id="fFh-7v-AbW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="l0b-wt-MsA"/>
+            <point key="canvasLocation" x="-431.8840579710145" y="63.616071428571423"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="分组 9" width="20" height="20"/>
+    </resources>
+</document>
