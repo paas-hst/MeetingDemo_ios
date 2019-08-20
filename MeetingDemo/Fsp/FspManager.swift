@@ -505,7 +505,7 @@ class FspManager: NSObject,FspEngineDelegate,FspEngineMsgDelegate,FspEngineSigna
     
     var msgId = UnsafeMutablePointer<UInt32>.allocate(capacity: 0)
     func sendUsrMsg(nUserId: String!, nMsg: String!, nMsgId: UnsafeMutablePointer<UInt32>!) -> FspErrCode {
-        return self.fsp_engine!.sendUsrMsg(nUserId, msg: nMsg, msgId: msgId);
+        return self.fsp_engine!.sendUserMsg(nUserId, msg: nMsg, msgId: msgId);
     }
     
     func sendGroupMsg(nMsg: String!, nMsgId: UnsafeMutablePointer<UInt32>!) -> FspErrCode {

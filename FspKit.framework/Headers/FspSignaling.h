@@ -7,168 +7,28 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <FspKit/FspCommon.h>
 
-//官方保留的videoid,代表特定类型的广播，广播时不能取这些值
-/**
- * @brief 屏幕共享
- */
-extern NSString * _Nonnull const FSP_RESERVED_VIDEOID_SCREENSHARE;
-
-/**
- * 错误码集合
- */
-typedef NS_ENUM(NSInteger, FspErrCode) {
-    FSP_ERR_OK = 0, ///<成功
-    
-    FSP_ERR_INVALID_ARG = 1,      ///<非法参数
-    FSP_ERR_NOT_INITED = 2,       ///<未初始化
-    FSP_ERR_OUTOF_MEMORY = 3,     ///<内存不足
-    FSP_ERR_DEVICE_FAIL = 4,      ///<访问设备失败
-    
-    FSP_ERR_CONNECT_FAIL = 30,     ///<网络连接失败
-    FSP_ERR_NO_GROUP = 31,         ///<没加入组
-    FSP_ERR_TOKEN_INVALID = 32,    ///<认证失败
-    FSP_ERR_APP_NOT_EXIST = 33,    ///<app不存在，或者app被删除
-    FSP_ERR_USERID_CONFLICT = 34,  ///<相同userid已经加入同一个组，无法再加入
-    
-    FSP_ERR_NO_BALANCE = 70,         ///<账户余额不足
-    FSP_ERR_NO_VIDEO_PRIVILEGE = 71, ///<没有视频权限
-    FSP_ERR_NO_AUDIO_PRIVILEGE = 72, ///<没有音频权限
-    
-    FSP_ERR_NO_SCREEN_SHARE = 73,    ///<当前没有屏幕共享
-    
-    FSP_ERR_RECVING_SCREEN_SHARE = 74,   ///<当前正在接收屏幕共享
-    
-    FSP_ERR_SERVER_ERROR = 301,        ///服务内部错误
-    FSP_ERR_FAIL = 302              ///<操作失败
-};
-
-
-/**
- * 视频显示缩放模式
- */
-typedef NS_ENUM(NSInteger, FspRemoteVideoOperate) {
-    FSP_REMOTE_VIDEO_OPEN = 0, ///<打开远端视频
-    FSP_REMOTE_VIDEO_CLOSE = 1  ///<关闭远端视频
-};
-
-
-/**
- * 视频显示缩放模式
- */
-typedef NS_ENUM(NSInteger, FspRenderMode) {
-    FSP_RENDERMODE_SCALE_FILL = 1, ///<缩放平铺
-    FSP_RENDERMODE_CROP_FILL = 2,  ///<等比裁剪显示
-    FSP_RENDERMODE_FIT_CENTER = 3 ///<等比居中显示
-};
 
 /**
  *@brief 用户状态
  */
-typedef NS_ENUM(NSUInteger, FspUsrStatus) {
-    FSP_USR_STATUS_ONLINE,  ///在线
-    FSP_USR_STATUS_OFFLINE  ///下线
+typedef NS_ENUM(NSUInteger, FspUserStatus) {
+    FSP_USER_STATUS_ONLINE,  ///在线
+    FSP_USER_STATUS_OFFLINE  ///下线
 };
 
 /**
  *@brief 用户信息
  */
-@interface FspUsrInfo : NSObject
+@interface FspUserInfo : NSObject
 @property (copy, nonatomic) NSString *_Nonnull userId; ///<用户id
-@property (assign, nonatomic) FspUsrStatus userStatus; ///<用户状态
+@property (assign, nonatomic) FspUserStatus userStatus; ///<用户状态
 @end
-
-
-/**
- * @brief 视频设备信息
- */
-@interface FspVideoDeviceInfo : NSObject
-@property (assign, nonatomic) NSInteger cameraId; ///<摄像头id
-@property (copy, nonatomic) NSString* _Nullable deviceName; ///<设备名
-@end
-
-/**
- * 视频统计信息
- */
-@interface FspVideoStatsInfo : NSObject
-@property (assign, nonatomic) NSInteger width; ///<视频宽,像素
-@property (assign, nonatomic) NSInteger height; ///<视频高，像素
-@property (assign, nonatomic) NSInteger framerate; ///<帧率
-@property (assign, nonatomic) NSInteger bitrate; ///<码率
-@end
-
-/**
- * 本地视频profile信息
- */
-@interface FspVideoProfile : NSObject
-@property (assign, nonatomic) NSInteger width; ///<视频宽,像素
-@property (assign, nonatomic) NSInteger height; ///<视频高，像素
-@property (assign, nonatomic) NSInteger framerate; ///<帧率
-
-/**
- * 通过width, height, framerate构造profile
- */
-+ (FspVideoProfile* _Nullable)profileWith:(NSInteger)width height:(NSInteger)height framerate:(NSInteger)framerate;
-@end
-
-/**
- * fspEvent事件类型
- */
-typedef NS_ENUM(NSInteger, FspEventType) {
-    FSP_EVENT_JOINGROUP = 0,          ///<加入组结果
-    FSP_EVENT_CONNECT_LOST = 1,       ///<与fsp服务的连接断开，应用层需要去重新加入组
-    FSP_EVENT_RECONNECT_START = 2,    ///<网络断开过，开始重连
-    FSP_EVENT_LOGIN_RESULT = 3        ///<登录结果
-};
-
-/**
- * 远端视频事件类型
- */
-typedef NS_ENUM(NSInteger, FspRemoteVideoEventType) {
-    FSP_REMOTE_VIDEO_PUBLISH_STARTED = 0, ///<远端广播了视频
-    FSP_REMOTE_VIDEO_PUBLISH_STOPED = 1, ///<远端停止广播视频
-    FSP_REMOTE_VIDEO_FIRST_RENDERED = 2  ///<远端视频加载完成第一帧渲染
-};
-
-/**
- * 远端音频事件类型
- */
-typedef NS_ENUM(NSInteger, FspRemoteAudioEventType) {
-    FSP_REMOTE_AUDIO_PUBLISH_STARTED = 0, ///<远端广播了音频
-    FSP_REMOTE_AUDIO_PUBLISH_STOPED = 1 ///<远端停止广播音频
-};
 
 
 @protocol FspSignaling <NSObject>
-/**
- *@brief 登入
- *@param nToken 访问fsp的令牌，令牌的获取参考fsp鉴权
- *@param nUserId 自身的userId
- *@return 结果错误码
- */
-- (FspErrCode)login:(NSString * _Nonnull)nToken userId:(NSString * _Nonnull)nUserId;
 
-/**
- *@brief 登出
- *@return 结果错误码
- */
-- (FspErrCode)loginOut;
-
-/**
- *@param nGroupId 加入组的group Id
- *@return  结果错误码
- */
-- (FspErrCode)joinGroup:(NSString *_Nonnull)nGroupId;
-
-/**
- * @brief 退出组
- */
-- (FspErrCode)leaveGroup;
-
-/**
- *@brief 销毁
- */
-- (FspErrCode)destoryFsp;
 
 /**
  *@brief 得到当前所有用户
@@ -210,7 +70,7 @@ typedef NS_ENUM(NSInteger, FspRemoteAudioEventType) {
  *@param nMsgId  消息id
  *@return 结果错误码
  */
-- (FspErrCode)sendUsrMsg:(NSString *_Nonnull)nUserId msg:(NSString *_Nonnull)nMsg msgId:(unsigned int *_Nonnull)nMsgId;
+- (FspErrCode)sendUserMsg:(NSString *_Nonnull)nUserId msg:(NSString *_Nonnull)nMsg msgId:(unsigned int *_Nonnull)nMsgId;
 
 /**
  *@brief 发送消息（群组）
@@ -276,7 +136,7 @@ typedef NS_ENUM(NSInteger, FspRemoteAudioEventType) {
  * @param nRequestId 请求id 与调用刷新的id成一对一关系
  * @param nUsrInfos 用户信息
  */
-- (void)refreshUserStatusFinished:(FspErrCode)errCode requestId:(uint32_t)nRequestId usrInfo:(NSMutableArray<FspUsrInfo*>*_Nonnull)nUsrInfos;
+- (void)refreshUserStatusFinished:(FspErrCode)errCode requestId:(uint32_t)nRequestId usrInfo:(NSMutableArray<FspUserInfo*>*_Nonnull)nUsrInfos;
 
 /**
  * @brief 收到邀请事件消息
