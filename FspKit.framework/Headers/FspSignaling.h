@@ -178,4 +178,12 @@ typedef NS_ENUM(NSUInteger, FspUserStatus) {
  * @param user_ids 用户id
  */
 - (void)onGroupUsersRefreshed:(NSArray<NSString *> * _Nonnull)user_ids;
+
+/**
+ *@brief 通知有用户状态改变
+ *@param nNewStatus 改变后的用户状态
+ */
+- (void) onUserStatusChanged:(NSString *_Nonnull)remoteUserId newStatus:(FspUserStatus)nNewStatus;
+
+
 @end

@@ -10,8 +10,6 @@ import UIKit
 
 //用户自己的登录账号
 let CONFIG_USE_ID_KEY = "config use id key"
-//是否使用默认配置
-let CONFIG_USE_DEFAULT_OPEN_KEY = "config use default open key"
 //自定义的appid
 let CONFIG_APP_ID_KEY = "config_app_id_key"
 //自定义的app_secret

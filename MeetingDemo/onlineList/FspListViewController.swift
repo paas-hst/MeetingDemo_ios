@@ -231,6 +231,8 @@ class FspListViewController: FspToolViewController,UITableViewDelegate,UITableVi
     
     override func switchToMainVc() -> Void {
          fspMeetingView = FspMeetingViewController.init(nibName: "FspMeetingViewController", bundle: Bundle.main)
+        print("跳转会议页面")
+        fsp_manager.cur_controller = fspMeetingView
         self.navigationController?.pushViewController(fspMeetingView!, animated: true)
     }
     

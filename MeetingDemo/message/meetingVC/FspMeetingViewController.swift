@@ -414,19 +414,14 @@ class FspMeetingViewController: FspToolViewController ,UICollectionViewDelegate,
     
 
     var needLayOutCollection: Bool = false
-    
+    //消息列表
+    var sysTemVC:FspSystemMsgVC = FspSystemMsgVC()
     
     @IBOutlet weak var networkLabel: UILabel!
     @IBOutlet weak var lagLabel: UILabel!
     @IBOutlet weak var fspLabel: UILabel!
     @IBOutlet weak var cpuInfoLabel: UILabel!
     @IBOutlet weak var memryInfoLabel: UILabel!
-    
-    //消息列表
-    lazy var sysTemVC: FspSystemMsgVC = {
-        let sysTemVC = FspSystemMsgVC()
-        return sysTemVC
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -1447,10 +1442,20 @@ class FspMeetingViewController: FspToolViewController ,UICollectionViewDelegate,
         
         let attendeeModel = self.getAttendeeModelWithUrsId(userId: userId)
         if (attendeeModel != nil){
-            if eventType == .FSP_REMOTE_VIDEO_PUBLISH_STARTED{
-                attendeeModel!.isCameraOpen = true
-            }else if (eventType == .FSP_REMOTE_VIDEO_PUBLISH_STOPED){
-                attendeeModel!.isCameraOpen = false
+            if videoId == FSP_RESERVED_VIDEOID_SCREENSHARE {
+            //桌面共享
+                if eventType == .FSP_REMOTE_VIDEO_PUBLISH_STARTED {
+                   attendeeModel!.isScreenShareOpen = true
+                }else if eventType == .FSP_REMOTE_VIDEO_PUBLISH_STOPED{
+                   attendeeModel!.isScreenShareOpen = false
+                }
+            }else{
+            //视频
+                if eventType == .FSP_REMOTE_VIDEO_PUBLISH_STARTED {
+                   attendeeModel!.isCameraOpen = true
+                }else if eventType == .FSP_REMOTE_VIDEO_PUBLISH_STOPED{
+                   attendeeModel!.isCameraOpen = false
+                }
             }
             self.updateAttendeeModelStatusWithModel(attendeeModel: attendeeModel!)
         }

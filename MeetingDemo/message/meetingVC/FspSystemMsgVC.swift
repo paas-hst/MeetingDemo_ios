@@ -136,7 +136,12 @@ class FspSystemMsgVC: UIViewController,UITableViewDataSource,UITableViewDelegate
             print(self.fspSystemTable.contentOffset.y)
             print("offsetY - height == %lf",offsetY - height)
             
-            let index = IndexPath(row: self.msgInfoArr.count - 1, section: 0)
+            var index = IndexPath(row: self.msgInfoArr.count - 1, section: 0)
+            var rows = self.fspSystemTable.numberOfRows(inSection: 0);
+            if rows > 1 {
+                rows -= 1
+            }
+            index.row = rows
             self.fspSystemTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
         }
     }

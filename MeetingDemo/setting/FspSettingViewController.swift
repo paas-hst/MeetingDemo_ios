@@ -19,19 +19,27 @@ class FspSettingViewController: FspToolViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
-        let use_custom_id = UserDefaults.standard.bool(forKey: CONFIG_USE_DEFAULT_OPEN_KEY)
+        switchConfigBtn.isEnabled = true
+        let use_custom_id = UserDefaults.standard.bool(forKey: CONFIG_KEY_USECONFIG)
         self.switchConfigBtn.isOn = !use_custom_id
         
-        let strAppId = UserDefaults.standard.object(forKey: CONFIG_KEY_APPID)
-        let strSecretKey = UserDefaults.standard.object(forKey: CONFIG_KEY_SECRECTKEY)
-        let strServerAddr = UserDefaults.standard.object(forKey: CONFIG_KEY_SERVETADDR)
+        var strAppId = UserDefaults.standard.string(forKey: CONFIG_KEY_APPID) ?? ""
+        var strSecretKey = UserDefaults.standard.string(forKey: CONFIG_KEY_SECRECTKEY) ?? ""
+        var strServerAddr = UserDefaults.standard.string(forKey: CONFIG_KEY_SERVETADDR) ?? ""
         
-        if strAppId != nil || strSecretKey != nil || strServerAddr != nil  {
-            appIdTextInput.text =  strAppId as! String
-            appSecretInput.text = strSecretKey as! String
-            appServerAdressInput.text = strServerAddr as! String
+        if strAppId.count != 0 {
+            appIdTextInput.text =  strAppId
         }
+        
+        if strSecretKey.count != 0 {
+            appSecretInput.text = strSecretKey
+        }
+        
+        if strServerAddr.count == 0 {
+            strServerAddr = ""
+        }
+        
+        appServerAdressInput.text = strServerAddr
         
         // Do any additional setup after loading the view.
     }
@@ -42,7 +50,7 @@ class FspSettingViewController: FspToolViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = "设置"
-        let use_custom_id = UserDefaults.standard.bool(forKey: CONFIG_USE_DEFAULT_OPEN_KEY)
+        let use_custom_id = !UserDefaults.standard.bool(forKey: CONFIG_KEY_USECONFIG)
         self.switchConfigBtn.isOn = use_custom_id
         self.showOrhideSettingView()
     }
@@ -51,12 +59,10 @@ class FspSettingViewController: FspToolViewController {
         if self.switchConfigBtn.isOn {
             self.settingView.isHidden = true
             DebugLogTool.debugLog(item: "使用默认配置")
-            UserDefaults.standard.set(true, forKey: CONFIG_USE_DEFAULT_OPEN_KEY)
             UserDefaults.standard.set(false, forKey: CONFIG_KEY_USECONFIG)
         }else{
             self.settingView.isHidden = false
             DebugLogTool.debugLog(item: "使用自定义配置")
-            UserDefaults.standard.set(false, forKey: CONFIG_USE_DEFAULT_OPEN_KEY)
             UserDefaults.standard.set(true, forKey: CONFIG_KEY_USECONFIG)
         }
         UserDefaults.standard.synchronize()
@@ -65,24 +71,32 @@ class FspSettingViewController: FspToolViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.hideKeyBoard()
+        let strAppId = appIdTextInput.text
+        let strSecretKey = appSecretInput.text
+        let strServerAddr = appServerAdressInput.text
+        if self.switchConfigBtn.isOn {
+            UserDefaults.standard.set(false, forKey: CONFIG_KEY_USECONFIG)
+            UserDefaults.standard.set(strAppId, forKey: CONFIG_KEY_APPID)
+            UserDefaults.standard.set(strSecretKey, forKey: CONFIG_KEY_SECRECTKEY)
+            UserDefaults.standard.set(strServerAddr, forKey: CONFIG_KEY_SERVETADDR)
+        }else{
+            UserDefaults.standard.set(true, forKey: CONFIG_KEY_USECONFIG)
+            UserDefaults.standard.set(strAppId, forKey: CONFIG_KEY_APPID)
+            UserDefaults.standard.set(strSecretKey, forKey: CONFIG_KEY_SECRECTKEY)
+            UserDefaults.standard.set(strServerAddr, forKey: CONFIG_KEY_SERVETADDR)
+        }
+        
         self.navigationController?.navigationBar.shadowImage = FspTools.createImageWithColor(color: .clear)
         
         return
         /*暂时不支持销毁fsp,重构*/
-       let strAppId = appIdTextInput.text
-       let strSecretKey = appSecretInput.text
-       let strServerAddr = appServerAdressInput.text
-        
         if strAppId!.count == 0 || strSecretKey!.count == 0 || strServerAddr!.count == 0 {
             //用回默认
             //啥都不改
-            UserDefaults.standard.set(true, forKey: CONFIG_USE_DEFAULT_OPEN_KEY)
             UserDefaults.standard.set(false, forKey: CONFIG_KEY_USECONFIG)
         }else{
             
-            UserDefaults.standard.set(false, forKey: CONFIG_USE_DEFAULT_OPEN_KEY)
             UserDefaults.standard.set(true, forKey: CONFIG_KEY_USECONFIG)
-            
             UserDefaults.standard.set(strAppId, forKey: CONFIG_KEY_APPID)
             UserDefaults.standard.set(strSecretKey, forKey: CONFIG_KEY_SECRECTKEY)
             UserDefaults.standard.set(strServerAddr, forKey: CONFIG_KEY_SERVETADDR)

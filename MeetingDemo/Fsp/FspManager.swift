@@ -12,6 +12,10 @@ var AppId: String = "925aa51ebf829d49fc98b2fca5d963bc"
 var SecretKey: String = "d52be60bb810d17e"
 var ServerAddr: String = ""
 
+//var AppId: String = "6ae85fefeb24bc16158d6a0be8eb9266"
+//var SecretKey: String = "e8cab8a26f60cd4a"
+//var ServerAddr: String = "http://192.168.7.201:20020/server/address"
+
 class listStatusModel: NSObject {
     var user_id = ""
     //1 代表在线 0代表下线
@@ -112,6 +116,10 @@ class FspManager: NSObject,FspEngineDelegate,FspEngineMsgDelegate,FspEngineSigna
         }
     }
     
+    func onUserStatusChanged(_ remoteUserId: String, newStatus nNewStatus: FspUserStatus){
+        print(remoteUserId,"change！")
+    }
+    
     func onReceiveUserMsg(_ nSrcUserId: String, msg nMsg: String, msgId nMsgId: Int32) {
        // DispatchQueue.main.sync {
             if cur_controller != nil {
@@ -182,7 +190,7 @@ class FspManager: NSObject,FspEngineDelegate,FspEngineMsgDelegate,FspEngineSigna
         if eventType == .FSP_EVENT_JOINGROUP {
             if errCode == FspErrCode.FSP_ERR_OK{
                 DebugLogTool.debugLog(item: "加入组成功")
-                DispatchQueue.main.async {
+                DispatchQueue.main.sync {
                     self.hud!.hide(animated: true)
                     self.hud = nil
                     if self.cur_controller != nil {
@@ -254,7 +262,14 @@ class FspManager: NSObject,FspEngineDelegate,FspEngineMsgDelegate,FspEngineSigna
         //接收或者移除远端视频
         if cur_controller != nil {
             let vc = cur_controller as! FspToolViewController
-            vc.remoteVideoEvent(userId, videoId: videoId, eventType: eventType)
+            if Thread.isMainThread {
+                vc.remoteVideoEvent(userId, videoId: videoId, eventType: eventType)
+            }else{
+                DispatchQueue.main.sync {
+                    vc.remoteVideoEvent(userId, videoId: videoId, eventType: eventType)
+                }
+            }
+            
         }
     }
     
@@ -358,23 +373,25 @@ class FspManager: NSObject,FspEngineDelegate,FspEngineMsgDelegate,FspEngineSigna
         let documentPath = documentPaths[0]
         let useConfigVal = UserDefaults.standard.bool(forKey: CONFIG_KEY_USECONFIG)
         if useConfigVal == true {
-            strAppId = UserDefaults.standard.string(forKey: CONFIG_KEY_APPID)!
-            strSecretKey = UserDefaults.standard.string(forKey: CONFIG_KEY_SECRECTKEY)!
-            strServerAddr = UserDefaults.standard.string(forKey: CONFIG_KEY_SERVETADDR)!
+            strAppId = UserDefaults.standard.string(forKey: CONFIG_KEY_APPID) ?? ""
+            strSecretKey = UserDefaults.standard.string(forKey: CONFIG_KEY_SECRECTKEY) ?? ""
+            strServerAddr = UserDefaults.standard.string(forKey: CONFIG_KEY_SERVETADDR) ?? ""
         }else{
              strAppId = AppId
              strSecretKey = SecretKey
              strServerAddr = ServerAddr
         }
         
-        if (strAppId.count <= 0 || strSecretKey.count <= 0 || strServerAddr.count <= 0) {
-             strAppId = AppId
-             strSecretKey = SecretKey
-             strServerAddr  = ServerAddr
+        if (strAppId.count <= 0 || strSecretKey.count <= 0) {
+             return false
         }
     
         print("%%%%%%%%%%%%%%%%%%%%%%")
         print("############# %@,%@,%@",strAppId,strSecretKey,strServerAddr)
+        
+        SecretKey = strSecretKey
+        AppId = strAppId
+        ServerAddr = strServerAddr
         
         fsp_engine = FspEngine.sharedEngine(withAppId: strAppId, logPath: documentPath, serverAddr: strServerAddr, delegate: self)
         if fsp_engine != nil {

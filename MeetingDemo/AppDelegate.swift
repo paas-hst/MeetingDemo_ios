@@ -63,7 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,FspManagerRemoteSignalling
         if (!isFirst){
             UserDefaults.standard.set(true, forKey: "firstLaunch")
             print("首次进入,使用默认设置地址")
-            UserDefaults.standard.set(true, forKey: CONFIG_USE_DEFAULT_OPEN_KEY)
             UserDefaults.standard.set(false, forKey: CONFIG_KEY_USECONFIG)
             
         }else {
